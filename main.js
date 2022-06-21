@@ -130,12 +130,12 @@ displayText: 'Selamat Tinggal Beban',
 id: 'bye'
 }
 }]                  
-Welcome = await getBuffer(`https://api.lolhuman.xyz/api/base/welcome?apikey=${lolkey}&img1=${ppuser}&img2=${ppgroup}&background=https://www.linkpicture.com/q/20211125_113317.jpg&username=${nama}&member=${encodeURIComponent(memb)}&groupname=${encodeURIComponent(metadata.subject)}`)
-Left = await getBuffer(`https://api.lolhuman.xyz/api/base/leave?apikey=${lolkey}&img1=${ppuser}&img2=${ppgroup}&background=https://www.linkpicture.com/q/20211125_113317.jpg&username=${nama}&member=${encodeURIComponent(memb)}&groupname=${encodeURIComponent(metadata.subject)}`)
+Welcome = await getBuffer(`https://api.dapuhy.xyz/api/canvas/welcome3?name=${nama}&gcname=${encodeURIComponent(metadata.subject)}&member=${encodeURIComponent(memb)}&pp=${ppuser}&bg=https://www.linkpicture.com/q/20211125_113317.jpg&apikey=Kirbotz123`)
+//Left = await getBuffer(`https://api.lolhuman.xyz/api/base/leave?apikey=${lolkey}&img1=${ppuser}&img2=${ppgroup}&background=https://www.linkpicture.com/q/20211125_113317.jpg&username=${nama}&member=${encodeURIComponent(memb)}&groupname=${encodeURIComponent(metadata.subject)}`)
                 if (anu.action == 'add') {
                     kirbotz.send5ButImg(anu.id, cangton, `Name Grup ${metadata.subject} `, Welcome, btn)
                 } else if (anu.action == 'remove') {
-                   kirbotz.send5ButImg(anu.id, cangtion, `Leaving To  ${metadata.subject} `, Left, bton)
+                   kirbotz.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
             }
         } catch (err) {
