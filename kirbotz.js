@@ -101,7 +101,6 @@ const _petualang = JSON.parse(fs.readFileSync('./database/inventori.json'))
 const balance = JSON.parse(fs.readFileSync('./database/balance.json'))
 const autosticker = JSON.parse(fs.readFileSync('./database/autosticker.json'))
 const prem = JSON.parse(fs.readFileSync('./database/premium.json'))
-const ban = JSON.parse(fs.readFileSync('./database/ban.json'))
 
 blocked = []
 const turbrek = `break`
@@ -146,7 +145,6 @@ try {
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
     	const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isAutoSticker = m.isGroup ? autosticker.includes(from) : false
-        const isBan = ban.includes(m.sender)
         const isPrem = prem.includes(sender)
         const isPetualang = checkPetualangUser(sender)
         const isSewa = _sewa.checkSewaGroup(from, sewa)
@@ -838,7 +836,6 @@ await fs.unlinkSync(encmedia)
 switch (command) {
 case 'creategc': {
 if (!isCreator) return reply(mess.owner)
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!args.join(" ")) return reply(`Penggunaan ${prefix+command} namagroup`)
 try {
 let cret = await kirbotz.groupCreate(args.join(" "), [])
@@ -859,7 +856,6 @@ reply("Error!")
 break
 case 'getcase': {
 if (!isCreator) return reply(mess.owner)
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!args[0]) return reply("Mau ngambil case apa?")
 try {
 reply(`// KennBot MD\n` + 'case ' + `'${args[0]}'` + fs.readFileSync('./kirbotz.js').toString().split(`case '${args[0]}'`)[1].split(turbrek)[0] + turbrek)
@@ -869,7 +865,6 @@ reply("Case Tidak Ditemukan")
 }
 break
 case 'readmore':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 var more = String.fromCharCode(8206)
                 var readMore = more.repeat(4001)
                 const rmoreteks1 = q.split('|')[0] ? q.split('|')[0] : q
@@ -877,7 +872,6 @@ var more = String.fromCharCode(8206)
                 reply(`${rmoreteks1}${readMore}${rmoreteks2}`)
                 break
 case 'nulis':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!q) return reply(`Teks Nya Apa Kak?`)
 let fejfjej = [
 {
@@ -913,7 +907,6 @@ let fejfjej = [
 kirbotz.sendList(m.chat, `Haii *${pushname}*`, `Silahkan Pilih Di Bawah`, "CLICK", "Fitur Nulis By KennBot MD ", fejfjej, { quoted: m })
 break
 case 'nuliskiri':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (args.length < 1) return replyNya(`Kirim perintah *${prefix}nuliskiri* teks`)
 replyNya(mess.wait)
 var tulisan = body.slice(11)
@@ -927,7 +920,6 @@ kirbotz.sendMessage(from, { image: fs.readFileSync('./Kir/FOTO/BUKU/setelahkiri.
 }
 break
 case 'nuliskanan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                 if (args.length < 1) return replyNya(`Kirim perintah *${prefix}nuliskanan* teks`)
 replyNya(mess.wait)
                 var tulisan = body.slice(12)
@@ -941,7 +933,6 @@ replyNya(mess.wait)
             }
                 break
 case 'foliokiri':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                 if (args.length < 1) return replyNya(`Kirim perintah *${prefix}foliokiri* teks`)
 replyNya(mess.wait)
                 var tulisan = body.slice(11)
@@ -955,7 +946,6 @@ replyNya(mess.wait)
             }
                 break
 case 'foliokanan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                 if (args.length < 1) return replyNya(`Kirim perintah *${prefix}foliokanan* teks`)
 replyNya(mess.wait)
                 var tulisan = body.slice(12)
@@ -969,7 +959,6 @@ replyNya(mess.wait)
             }
                 break
 case 'mlstalk': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!q) return replyNya("Isi id|zoneid")
 let dat = await idML(q.split("|")[0], q.split("|")[1])
 replyNya(`Id : ${dat.userId}
@@ -979,7 +968,6 @@ Country : ${dat.country}`)
 }
 break
 case 'ffstalk': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!args[0]) return replyNya(`Example : \n${prefix + command} 946716486`)
 if (!Number(args[0])) return replyNya("Hanya angka")
 let dede = await caliph.search.freefireid(args.join(" "))
@@ -988,7 +976,6 @@ reply(teks)
 }
 break
 case 'cowner': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!isCreator) return replyNya(mess.owner)
 if (!args[0]) return replyNya(`Pilih add atau del`)
 orgnye = m.mentionedJid[0] ? m.mentionedJid[0].split("@")[0] : m.quoted ? m.quoted.sender.split("@")[0] : args[1] ? args[1] : false
@@ -1008,7 +995,6 @@ replyNya("Error")
 }
 break
 case 'profile': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 const jidny = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.sender ? m.sender : false
 const ddny = await store.chats.all().filter(v => v.id.includes(jidny)).map(v => v)
 const isblocks = await kirbotz.fetchBlocklist()
@@ -1064,7 +1050,6 @@ fs.writeFileSync('./database/ban.json', JSON.stringify(ban))
 reply(`Nomor Telah Di Unban!!!`)
 break
 case 'zippysearch':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                     if (args.length == 0) return reply(`Example: ${prefix + command} https://www51.zippyshare.com/v/5W0TOBz1/file.html`)
                     reply(mess.wait)
                     ini_url = args[0]
@@ -1077,7 +1062,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
                     replyNya(ini_txt)
                     break
 case 'smeme': case 'stickermeme': case 'stickmeme': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!text) return replyNya(`Kirim/Reply Foto Dengan Caption ${prefix + command} *teks*`)
 if (text.includes('|')) return replyNya(`Kirim/Reply Foto Dengan Caption ${prefix + command} *teks*`)
 if (!/image/.test(mime)) return replyNya(`Kirim/Reply Foto Dengan Caption ${prefix + command} *teks*`)
@@ -1122,7 +1106,6 @@ let sewanya = `*「 SEWA EXPIRE 」*\n\n➸ *ID*: ${from}\n➸ *Expired :* ${cek
 reply(sewanya)
 break
 case 'tebak': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
             	if (!m.isGroup) return replyNya(mess.group)
                 if (!text) throw `Example : ${prefix + command} lagu\n\nOption : \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`
@@ -1217,7 +1200,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
             }
             break
 case 'kuismath': case 'math': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
             	if (!m.isGroup) return reply(mess.group)
                 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
@@ -1236,7 +1218,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
             }
             break
 case 'lirik':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
 query = args.join(" ")
@@ -1244,7 +1225,6 @@ nanih = await fetchJson(`https://api.lolhuman.xyz/api/lirik?apikey=${lolkey}&que
 replyNya(nanih.result)
 break
 case 'darkjokes':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 nyenye = fs.readFileSync('./Lib/darkjokes.js');
@@ -1279,7 +1259,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'meme':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 nyaa = fs.readFileSync('./Lib/meme.js');
@@ -1314,7 +1293,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'hsdxd':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 kntlll = fs.readFileSync('./Lib/highschooldxd.js');
@@ -1349,7 +1327,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'sao':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 kntll = fs.readFileSync('./Lib/swortartonline.js');
@@ -1384,7 +1361,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'lovelive':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 kntl = fs.readFileSync('./Lib/lovelive.js');
@@ -1463,13 +1439,11 @@ case 'sound59':case 'sound60':case 'sound61':case 'sound62':
 case 'sound63':case 'sound64':case 'sound65':case 'sound66':
 case 'sound67':case 'sound68':case 'sound69':case 'sound70':
 case 'sound71':case 'sound72':case 'sound73':case 'sound74':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 inicdd = await getBuffer(`https://github.com/saipulanuar/Api-Github/raw/main/sound/${command}.mp3`)
 kirbotz.sendMessage(m.chat, {audio: inicdd, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
 break
 case 'tts':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!q) return replyNya(`Teks Nya???`)
 sticWait(from)
@@ -1481,7 +1455,6 @@ await replyBan(`Chat Owner Di Bawah`)
 }
 break
 case 'creator': case 'owner': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 kirbotz.sendContact(m.chat, global.owner, m)
 }
 break
@@ -1524,7 +1497,6 @@ kirbotz.sendMessage(m.chat, { image: ppnyauser, caption: teksits, contextInfo: {
 }}}, { quoted: fakekirbotz })
 break
 case 'quest':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let sectionnya= [
 {
@@ -1597,7 +1569,6 @@ kirbotz.sendList(m.chat, `Haii *${pushname}*`, `Silahkan Pilih Di Bawah`, "CLICK
 break
 case 'slime':
 case 'killslime':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -1605,7 +1576,6 @@ await sendButslime(from)
 break
 case 'goblin':
 case 'killgoblin':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -1613,7 +1583,6 @@ await sendButgoblin(from)
 break
 case 'devil':
 case 'killdevil':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -1621,14 +1590,12 @@ await sendButdevil(from)
 break
 case 'behemoth':
 case 'killbehemoth':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
 await sendButbehemoth(from)
 break
 case 'killdemon':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -1636,7 +1603,6 @@ await sendButdemon(from)
 break
 case 'demonking':
 case 'killdemonking':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -1645,7 +1611,6 @@ break
 
 break
 case 'menu': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 menuu = `
 ┌─〔  Info User 〕
 │➥Nama User: ${pushname}
@@ -2285,7 +2250,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'tes':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 let btn = [{
 urlButton: {
 displayText: '👑 Owner ',
@@ -2311,7 +2275,6 @@ replyNya(`*${Object.keys(global.db.data.users).length} User*`)
 }
 break
 case 'rules': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 ules = `${ucapanWaktu} 𝐊𝐚𝐤 *${pushname}*
 𒍮 *Rules Bot*
 ❒͡ 1. Jangan Spam Command, Berikan Delay 1-3 detik
@@ -2347,7 +2310,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'listpc': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
             	if (!m.key.fromMe && !isCreator) return replyNya(mess.owner)
                  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id)
                  let teks = `⬣ *LIST PERSONAL CHAT*\n\nTotal Chat : ${anu.length} Chat\n\n`
@@ -2371,7 +2333,6 @@ case 'unblock': {
 	}
 	break
 case 'bcimg': case 'bcvidio': case 'bcaudio': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!isCreator) return replyNya(mess.owner)
 if (!/video/.test(mime) && !/image/.test(mime) && !/audio/.test(mime)) return replyNya(`Kirim/Reply Video/Audio/Image Yang Ingin Di Broadcast Dengan Caption ${prefix + command}`)
 let anu = await store.chats.all().map(v => v.id)
@@ -2411,7 +2372,6 @@ replyNya(`Sukses Mengirim Broadcast Ke ${anu.length} Chats`)
 }
 break
 case 'bcall': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                 if (!isCreator) return replyNya(mess.owner)
                 if (!text) return replyNya(`Text mana?\n\nExample : ${prefix + command} fatih-san`)
                 let anu = await store.chats.all().map(v => v.id)
@@ -2446,7 +2406,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
             }
             break
 case 'asupan': case 'asupansantuy': case 'asupanbocil': case 'asupanukhty': case 'asupanghea': case 'asupanrikagusriani':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasiltod = await fetchJson(`https://api.dapuhy.xyz/api/asupan/${command}?apikey=${dapkey}`)
@@ -2484,7 +2443,6 @@ case 'lewdanimegirls':
 case 'biganimetiddies':
 case 'animebellybutton':
 case 'hentai4everyone':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasil = await getBuffer(`https://api.lolhuman.xyz/api/random/nsfw/${command}?apikey=${lolkey}`)
@@ -2516,7 +2474,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'asupan2':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasiltod = await fetchJson(`https://api.lolhuman.xyz/api/asupan?apikey=${lolkey}`)
@@ -2524,7 +2481,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasiltod.result }, mimetype: 'video/
 }
 break
 case 'ghea':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasilwjd = await fetchJson(`https://spybot-api.herokuapp.com/api/asupan/ghea?apikey=SpyBotApi`)
@@ -2532,7 +2488,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasilwjd.result.url }, mimetype: 'vi
 }
 break
 case 'ukhty':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasilwjd = await fetchJson(`https://spybot-api.herokuapp.com/api/asupan/ukty?apikey=SpyBotApi`)
@@ -2540,7 +2495,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasilwjd.result.url }, mimetype: 'vi
 }
 break
 case 'rikagusriani':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasifs = await fetchJson(`https://spybot-api.herokuapp.com/api/asupan/rikagusriani?apikey=SpyBotApi`)
@@ -2548,7 +2502,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasifs.result.url }, mimetype: 'vide
 }
 break
 case 'santuy':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasifs = await fetchJson(`https://raku-web.herokuapp.com/api/asupan/santuy?apikey=RakuKeyTod`)
@@ -2556,7 +2509,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasifs.result.url }, mimetype: 'vide
 }
 break
 case 'bocil':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasily = await fetchJson(`https://spybot-api.herokuapp.com/api/asupan/bocil?apikey=SpyBotApi`)
@@ -2564,7 +2516,6 @@ kirbotz.sendMessage(m.chat, { video: { url: hasily.result.url }, mimetype: 'vide
 }
 break
 case 'bokep':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 dwhe = await getBuffer(`https://raku-web.herokuapp.com/api/bokep?apikey=RakuKeyTod`)
@@ -2572,7 +2523,6 @@ kirbotz.sendMessage(m.chat, { video: dwhe, mimetype: 'video/mp4', fileName: `${c
 }
 break
 case 'storyanime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasiltod = await fetchJson(`https://api.lolhuman.xyz/api/storynime?apikey=${lolkey}`)
@@ -2623,7 +2573,6 @@ case 'cringe':
 case 'cuddle':
 case 'highfive':
 case 'handhold':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 axios.get(`https://api.waifu.pics/sfw/${command}`)
 .then(({data}) => {
@@ -2631,19 +2580,16 @@ kirbotz.sendImageAsSticker(m.chat, data.url, m, { packname: global.packname, aut
 })
 break
 case 'attp':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} Hai`)
 gehdhe = await getBuffer(`https://api.xteam.xyz/${command}?file&text=${encodeURI(q)}`)
 kirbotz.sendMessage(m.chat, { sticker: gehdhe }, { quoted: fakekirbotz })
 break
 case 'ttp':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} Hai`)
 veireuue = await getBuffer(`https://api.lolhuman.xyz/api/ttp?apikey=${lolkey}&text=${encodeURI(q)}`)
 kirbotz.sendMessage(m.chat, { sticker: veireuue }, { quoted: fakekirbotz })
 break
 case 'tovideo': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
                 if (!quoted) throw 'Reply sticker'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
                 sticWait(from)
@@ -2655,7 +2601,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
             }
             break
 case 'tovn':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
             if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
             sticWait(from)
@@ -2665,7 +2610,6 @@ if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang In
             }
             break
 case 'tomp3': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
             if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
@@ -2676,7 +2620,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
             }
             break
 case 'sticker': case 's': case 'stickergif': case 'sgif': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!quoted) replyNya(`Balas Video/Image Dengan Caption ${prefix + command}`)
 if (/image/.test(mime)) {
 let media = await quoted.download()
@@ -2693,7 +2636,6 @@ replyNya (`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1
 }
 break
 case 'emojimix': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!text) return replyNya(`Example : ${prefix + command} 😅+🤔`)
 let [emoji1, emoji2] = text.split`+`
@@ -2705,7 +2647,6 @@ await fs.unlinkSync(encmedia)
 }
 break
 case 'emoji':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} 🗿`)
 titor = await getBuffer(`https://api.lolhuman.xyz/api/smoji/${encodeURI(q)}?apikey=${lolkey}`)
@@ -2718,7 +2659,6 @@ case 'amongus':
 case 'gawrgura':
 case 'anjing':
 case 'bucinstick':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let buffer = await getBuffer(`https://api.lolhuman.xyz/api/sticker/${command}?apikey=${lolkey}`)
 kirbotz.sendMessage(m.chat, { sticker: buffer }, { quoted: fakekirbotz })
@@ -2727,7 +2667,6 @@ case 'faktaunik':
 case 'katabijak': 
 case 'pantun': 
 case 'bucin': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 kohg = await fetchJson(`https://api.lolhuman.xyz/api/random/${command}?apikey=${lolkey}`)
 let buttons = [
@@ -2743,7 +2682,6 @@ kirbotz.sendMessage(m.chat, buttonMessage, { quoted: fakekirbotz })
 }
 break
 case 'quotes':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 var res = await Quotes()
 teks = ".•♫•♬.•♫••♬•♫•.•♬•♫•.•♫•♬.•♫••♬•♫•.•♬•♫•."
@@ -2764,7 +2702,6 @@ kirbotz.sendMessage(m.chat, buttonMessage, { quoted: fakekirbotz })
 }
 break
 case 'tafsirsurah': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!args[0]) return replyNya(`Contoh penggunaan:\n${prefix + command} 1 2\n\nmaka hasilnya adalah tafsir surah Al-Fatihah ayat 2`)
 if (!args[1]) return replyNya(`Contoh penggunaan:\n${prefix + command} 1 2\n\nmaka hasilnya adalah tafsir surah Al-Fatihah ayat 2`)
@@ -2780,154 +2717,132 @@ replyNya(txt)
 }
 break
 case 'cerpen-anak':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`anak`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-bahasadaerah':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`bahasa daerah`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-bahasainggris':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`bahasa Inggris`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-bahasajawa':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`bahasa jawa`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-bahasasunda':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`bahasa sunda`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-budaya':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`budaya`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cinta':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintaislami':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta islami`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintapertama':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta pertama`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintaromantis':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta romantis`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintasedih':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta sedih`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintasegitiga':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`Cinta segitiga`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-cintasejati':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`cinta sejati`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-galau':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`galau`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-gokil':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`gokil`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-inspiratif':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`inspiratif`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-jepang':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`jepang`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-kehidupan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`kehidupan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-keluarga':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`keluarga`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-kisahnyata':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`kisah nyata`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-korea':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`korea`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-kristen':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`kristen`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
@@ -2950,189 +2865,162 @@ sock.sendMessage(from, { image : { url : top.qrCode}, caption : `Payment : ${top
 addCmd(command.slice(1), 1, commund)
 break
 case 'cerpen-liburan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`liburan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-malaysia':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`malaysia`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-mengharukan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`mengharukan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-misteri':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`misteri`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-motivasi':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`motivasi`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-nasihat':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`nasihat`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-nasionalisme':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`nasionalisme`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-olahraga':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`olahraga`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-patahhati':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`patah hati`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-penantian':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`penantian`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-pendidikan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`pendidikan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-pengalaman':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`pengalaman pribadi`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-pengorbanan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`pengorbanan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-penyesalan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`penyesalan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-perjuangan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`perjuangan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-perpisahan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`perpisahan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-persahabatan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`persahabatan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-petualangan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`petualangan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-ramadhan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`ramadhan`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-remaja':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`remaja`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-rindu':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`rindu`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-rohani':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`rohani`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-romantis':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`romantis`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-sastra':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`sastra`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-sedih':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`sedih`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen-sejarah':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let cerpe = await cerpen(`sejarah`)
 reply(`⭔ _*Title :*_ ${cerpe.title}\n⭔ _*Author :*_ ${cerpe.author}\n⭔ _*Category :*_ ${cerpe.kategori}\n⭔ _*Pass Moderation :*_ ${cerpe.lolos}\n⭔ _*Story :*_\n${cerpe.cerita}`)
 }
 break
 case 'cerpen':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 kohp = await fetchJson(`https://api.lolhuman.xyz/api/cerpen?apikey=${lolkey}`)
 kohz = kohp.result
@@ -3152,7 +3040,6 @@ kirbotz.sendMessage(m.chat, buttonMessage, { quoted: fakekirbotz })
 }
 break
 case 'namapeople':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 kohc = await fetchJson(`https://api.lolhuman.xyz/api/random/people?apikey=${lolkey}`)
 kohx = kohc.result
@@ -3181,7 +3068,6 @@ kirbotz.sendMessage(m.chat, buttonMessage, { quoted: fakekirbotz })
 }
 break
 case 'asmaulhusna': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 kohj = await fetchJson(`https://api.lolhuman.xyz/api/asmaulhusna?apikey=${lolkey}`)
 kghw = kohj.result
@@ -3203,7 +3089,6 @@ kirbotz.sendMessage(m.chat, buttonMessage, { quoted: fakekirbotz })
 }
 break
 case 'kisahnabi':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} Muhammad`)
 query = args.join(" ")
@@ -3217,7 +3102,6 @@ ini_txt += `Story : \n${wdwp.story}`
 replyNya(ini_txt)
 break
 case 'jadwalsholat':	
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} Yogyakarta`)
 daerah = args.join(" ")
@@ -3237,7 +3121,6 @@ ini_txt += `Isya : ${wdzs.isya}`
 replyNya(ini_txt)
 break
 case 'listsurah':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 whqg = await fetchJson(`https://api.lolhuman.xyz/api/quran?apikey=${lolkey}`)
 whqa = whqg.result
@@ -3248,7 +3131,6 @@ ini_txt += `${x}. ${whqa[x]}\n`
 replyNya(ini_txt)
 break
 case 'mediafire':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 oh = `Example : ${prefix + command} link`
 if (!text) throw oh
@@ -3259,7 +3141,6 @@ kirbotz.sendMessage(m.chat, {document: mnya, mimetype: 'application/zip', fileNa
 }
 break
 case 'iqra': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 oh = `Example : ${prefix + command} 3\n\nIQRA Yang tersedia : 1,2,3,4,5,6`
 if (!text) throw oh
@@ -3269,7 +3150,6 @@ kirbotz.sendMessage(m.chat, {document: yy, mimetype: 'application/pdf', fileName
 }
 break
 case 'hadis': case 'hadist': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!args[0]) throw `Contoh:
 ${prefix + command} bukhari 1
@@ -3307,7 +3187,6 @@ replyNya(`Hadis tidak ditemukan !`)
 }
 break
 case 'juzamma': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args[0] === 'pdf') {
 sticWait(from)
@@ -3329,7 +3208,6 @@ Format Yang Tersedia : pdf, docx, pptx, xlsx`)
 }
 break
 case 'translate':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length < 1) return reply(`Text Nya Mana Kak?\nContoh\n${prefix + command} Who am I`)
 sticWait(from)
@@ -3339,7 +3217,6 @@ Detek = tes.translate
 replyNya(`👷Translate : ${Detek}\n🔎Hasil : ${Infoo}`)
 break
 case 'nekopoisearch':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
               if (args.length == 0) return replyNya(`Example: ${prefix + command} Isekai Harem`)
               query = args.join(" ")
@@ -3354,7 +3231,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
               replyNya(ini_txt)
               break
 case 'nekopoi':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
               if (args.length == 0) return replyNya(`Example: ${prefix + command} https://nekopoi.care/isekai-harem-monogatari-episode-4-subtitle-indonesia/`)
               ini_url = args[0]
@@ -3402,7 +3278,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }             
          break
 case 'lk21':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
                     if (args.length == 0) return reply(`Example: ${prefix + command} Transformer`)
                     sticWait(from)
@@ -3426,7 +3301,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
                     await kirbotz.sendMessage(m.chat, { image: eahdw, caption: ini_txt }, { quoted: fakekirbotz})                  
                     break
 case 'pinterest':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
 sticWait(from)
@@ -3437,7 +3311,6 @@ sticWait(from)
                     await kirbotz.sendMessage(m.chat, { image: ini_buffer, caption: '*PINTEREST IMAGE*' }, { quoted: fakekirbotz})                  
                     break
 case 'pinterest2':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
                     if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
                     sticWait(from)
@@ -3450,7 +3323,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
                     }
                     break
 case 'character':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
                     if (args.length == 0) return reply(`Example: ${prefix + command} Miku Nakano`)
 sticWait(from)
@@ -3471,7 +3343,6 @@ sticWait(from)
                     await kirbotz.sendMessage(m.chat, { image: gnejws, caption: ini_txt }, { quoted: fakekirbotz})                  
                     break
 case 'manga':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return reply(`Example: ${prefix + command} Gotoubun No Hanayome`)
 sticWait(from)
@@ -3503,7 +3374,6 @@ sticWait(from)
                     await kirbotz.sendMessage(m.chat, { image: cehdhw, caption: ini_txt }, { quoted: fakekirbotz})                  
                     break
 case 'kusonime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
              if (args.length == 0) return replyNya(`Example: ${prefix + command} Gotoubun No Hanayome`)
 sticWait(from)
@@ -3557,7 +3427,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }             
          break
 case 'anime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
              if (args.length == 0) return replyNya(`Example: ${prefix + command} Gotoubun No Hanayome`)
 sticWait(from)
@@ -3615,7 +3484,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }             
 break
 case 'ceritahoror':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 pqdnw = await fetchJson(`https://api.lolhuman.xyz/api/ceritahoror?apikey=${lolkey}`)
@@ -3679,7 +3547,6 @@ case 'birthdayday':
 case 'goldplaybutton':
 case 'silverplaybutton':
 case 'freefire':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} teks`)
 sticWait(from)
@@ -3738,7 +3605,6 @@ case 'icecold':
 case 'luxury':
 case 'summersand':
 case 'horrorblood':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} Nabb Botz`)
 sticWait(from)
@@ -3772,7 +3638,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'carbon':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if(!q) return replyNya(`Contoh: ${prefix + command} teks`)
 sticWait(from)
@@ -3879,7 +3744,6 @@ case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': ca
              }
 break
 case 'denimembroidery': case 'bracelet': case 'nightmare': case 'artpapercut': case 'neonwriting': case 'airballoon': case 'lovelock': case 'neonsign': case 'cemeterygates':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} teks`)
 sticWait(from)
@@ -3934,7 +3798,6 @@ case 'glowingneon':
 case 'fallleaves':
 case 'flamming':
 case 'carvedwood':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} teks`)
 sticWait(from)
@@ -3977,7 +3840,6 @@ case 'wolflogo':
 case 'steel3d':
 case 'wallgravity':
 case 'coolgravity':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} Nabb Botz Botz`)
 sticWait(from)
@@ -4012,7 +3874,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'ktpmaker':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Usage: ${prefix + command} nik|provinsi|kabupaten|nama|tempat, tanggal lahir|jenis kelamin|jalan|rt/rw|kelurahan|kecamatan|agama|status nikah|pekerjaan|warga negara|berlaku sampai|url_image\n\nExample: ${prefix + command} 456127893132123|bumipertiwi|fatamorgana|LoL Human|mars, 99-99-9999|belum ditemukan|jl wardoyo|999/999|turese|imtuni|alhamdulillah islam|jomblo kack|mikirin dia|indo ori no kw|hari kiamat|https://i.ibb.co/Xb2pZ88/test.jpg`)
 sticWait(from)
@@ -4037,7 +3898,6 @@ sticWait(from)
                     kirbotz.sendMessage(m.chat, { image: ini_buffer, caption: `*KTP MAKER*` }, { quoted: fakekirbotz})
                     break
 case 'tiktokmaker':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} teks1 teks2`)
 sticWait(from)
@@ -4074,7 +3934,6 @@ break
 case 'arcade8bit':
 case 'battlefield4':
 case 'pubg':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Contoh: ${prefix + command} teks1 teks2`)
 sticWait(from)
@@ -4119,7 +3978,6 @@ case 'sagiri':
 case 'shinobu':
 case 'megumin':
 case 'wallnime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 hasil = await getBuffer(`https://api.lolhuman.xyz/api/random/${command}?apikey=${lolkey}`)
@@ -4152,14 +4010,12 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 break
 case 'rpgmenu':
 case 'profile':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
 await sendButLoc(from)
 break
 case 'joinrpg':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group)  
 if (isPetualang) return replyNya('Kamu Sudah Menjadi Petualang')
@@ -4167,7 +4023,6 @@ if (args.length < 1) return replyNya(`Kirim perintah ${prefix + command} nama`)
 await sendButJoin(from, q)
 break
 case 'mining':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4200,7 +4055,6 @@ kirbotz.sendMessage(from, { text: mining }, {quoted: fakekirbotz})
 }, 0) // 1000 = 1s,
 break
 case 'inventori':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4211,7 +4065,6 @@ buttonnss = [
 kirbotz.sendButtonText(m.chat, buttonnss, `📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿\n • Nama : ${pushname}\n • Rank : ${role}\n • Status : ${elit}\n • Xp : ${getLevelingXp(sender)}/${reqXp}\n • Level : ${getLevelingLevel(sender)}\n🎒 𝗜𝗻𝘃𝗲𝗻𝘁𝗼𝗿𝗶 :\n • Emas : ${getEmas(sender)}🪙\n • Uang : $${(getBalance(sender, balance))}💰\n • Besi : ${getBesi(sender)}⛓️\n • Berlian : ${getDm(sender)}💎\n • Ikan : ${getFish(sender)}🎣`, kirbotz.user.name, m)
 break
 case 'sellikan':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4227,7 +4080,6 @@ buttotons = [
 kirbotz.sendButtonText(m.chat, buttotons, `🛒 𝗣𝗔𝗦𝗔𝗥\n • Penjual : ${pushname}\n • Pembeli : Admin\n • Harga/Ikan : 5\n • Status : Sukses\n • Sisa Ikan : ${getFish(sender)}\n • Hasil Penjualan : $${rp}`,  kirbotz.user.name, m)
 break
 case 'sellbesi':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4243,7 +4095,6 @@ butbes = [
 kirbotz.sendButtonText(m.chat, butbes, `🛒 𝗣𝗔𝗦𝗔𝗥\n • Penjual : ${pushname}\n • Pembeli : Admin\n • Harga/Besi : 10\n • Status : Sukses\n • Sisa Besi : ${getBesi(sender)}\n • Hasil Penjualan : $${rp}`, kirbotz.user.name, m)
 break
 case 'sellemas':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4259,7 +4110,6 @@ butem = [
 kirbotz.sendButtonText(m.chat, butem, `🛒 𝗣𝗔𝗦𝗔𝗥\n • Penjual : ${pushname}\n • Pembeli : Admin\n • Harga/Emas : 25\n • Status : Sukses\n • Sisa Emas : ${getEmas(sender)}\n • Hasil Penjualan : $${rp}`, kirbotz.user.name, m)
 break 
 case 'selldiamond':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4275,7 +4125,6 @@ butdi = [
 kirbotz.sendButtonText(m.chat, butdi, `🛒 𝗣𝗔𝗦𝗔𝗥\n • Penjual : ${pushname}\n • Pembeli : Admin\n • Harga/Dm : 75\n • Status : Sukses\n • Sisa Diamond : ${getDm(sender)}\n • Hasil Penjualan : $${etoo}`, kirbotz.user.name, m)
 break 
 case 'mancing':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4308,7 +4157,6 @@ addLevelingXp(sender, xp)
 addBalance(sender, coin, balance) 
 break
 case 'adventure':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4347,7 +4195,6 @@ addBalance(sender, money, balance)
 break
 case 'luckyday':
 case 'luckytime':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!m.isGroup) return replyNya(mess.group) 
 if (!isPetualang) return replyNya(mess.noPetualang)
@@ -4367,7 +4214,6 @@ kirbotz.sendButtonText(m.chat, butluck, `🎰 Lucky\n• Uang : $${b}\n• Emas 
 }
 break
 case 'cecan2':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 imgd = await fetchJson('https://spybot-api.herokuapp.com/api/asupan/cecan?apikey=SpyBotApi')
@@ -4399,7 +4245,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'hijaber':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 imgd = await fetchJson('https://spybot-api.herokuapp.com/api/asupan/hijaber?apikey=SpyBotApi')
@@ -4432,7 +4277,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 break
 case 'cecan':
 case 'cogan':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 imagenya = await getBuffer(`https://api.lolhuman.xyz/api/random/${command}?apikey=${lolkey}`)
@@ -4465,7 +4309,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 break
 case 'buypremium': case 'sewabot': {
 ya = '```'
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 sewbot = `Hai *${pushname}*
 
 List Sewabot
@@ -4516,7 +4359,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'payment': case 'donasi': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 donte = `_MAU BAYAR YA KAK_
 GOPAY : Scan Qr Di Atas
 
@@ -4560,7 +4402,6 @@ await kirbotz.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).ca
 }
 break
 case 'linkgroup': case 'linkgc': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 let response = await kirbotz.groupInviteCode(m.chat)
@@ -4568,7 +4409,6 @@ kirbotz.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : 
 }
 break
 case 'antilink':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) return replyNya(mess.group)
 if (!isGroupAdmins && !isCreator) return replyNya(mess.admin)
 if (!isBotAdmins) return replyNya(mess.botAdmin)
@@ -4589,7 +4429,6 @@ await kirbotz.sendButtonText(m.chat, buttons, `Mode Antilink`, kirbotz.user.name
 }
 break
 case 'antiwame':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) return replyNya(mess.group)
 if (!isGroupAdmins && !isCreator) return replyNya(mess.admin)
 if (!isBotAdmins) return replyNya(mess.botAdmin)
@@ -4610,7 +4449,6 @@ await kirbotz.sendButtonText(m.chat, buttons, `Mode Antilink`, kirbotz.user.name
 }
 break
 case 'listgc': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) return replyNya(mess.group)
 let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
 let teks = `     「 List Group Chat 」\n\nThere are ${anu.length} users using bot in group chat`
@@ -4627,7 +4465,6 @@ kirbotz.sendTextWithMentions(m.chat, teks, m)
 }
 break
 case 'autosticker':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) return replyNya(mess.group)
 if (!isGroupAdmins && !isCreator) return replyNya(mess.admin)
 if (!isBotAdmins) return replyNya(mess.botAdmin)
@@ -4649,7 +4486,6 @@ await kirbotz.sendButtonText(m.chat, buttons, `Mode Autosticker`, kirbotz.user.n
 }
 					break
 case 'group': case 'grup': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4667,7 +4503,6 @@ await kirbotz.sendButtonText(m.chat, buttons, `Mode Group`, kirbotz.user.name, m
 }
 break
 case 'apakah':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (args.length < 1) return replyNya(`Contoh : ${prefix}apakah aku jelek`)
 query = args.join(" ")
@@ -4684,7 +4519,6 @@ case 'jagocek':case 'nolepcek':case 'babicek':case 'bebancek':case 'baikcek':
 case 'jahatcek':case 'anjingcek':case 'haramcek':case 'pakboycek':
 case 'pakgirlcek':case 'sangecek': case 'bapercek':case 'fakboycek':case 'alimcek':case 'suhucek':
 case 'fakgirlcek':case 'kerencek':case 'wibucek':case 'pasarkascek':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (args.length < 1) return replyNya(`Contoh : ${prefix + command} KirBotz`)
 cantik = body.slice(1)
 const eyy =['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
@@ -4692,7 +4526,6 @@ const yn = eyy[Math.floor(Math.random() * eyy.length)]
 kirbotz.sendMessage(m.chat, { text: `${yn}%` }, { quoted: fakekirbotz })
 break
 case 'jadian': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 let member = participants.map(u => u.id)
 let orang = member[Math.floor(Math.random() * member.length)]
@@ -4708,7 +4541,6 @@ await kirbotz.sendButtonText(m.chat, buttons, jawab, kirbotz.user.name, m, {ment
 }
 break
 case 'bisakah':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (args.length < 1) return replyNya(`Contoh : ${prefix}bisakah aku terbang`)
 query = args.join(" ")
@@ -4719,7 +4551,6 @@ Jawaban : ${random}`
 replyNya(tt)
 break
 case 'kapankah':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (args.length < 1) return replyNya(`Contoh : ${prefix}kapankah aku menikah`)
 query = args.join(" ")
@@ -4731,7 +4562,6 @@ Jawaban : ${no} ${random}`
 replyNya(kapan)
 break      	   
 case 'rate':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (args.length < 1) return replyNya(`Contoh : ${prefix}rate aku ganteng`)
 random = `${Math.floor(Math.random() * 100)}`
@@ -4739,7 +4569,6 @@ rating = `Persentase : ${random}%`
 replyNya(rating)
 break
 case 'setppgc2': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) return replyNya(mess.group)
 if (!isAdmins && !isCreator) return replyNya(mess.admin)
 if (!quoted) return reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
@@ -4773,7 +4602,6 @@ reply(`Sukses`)
 }
 break
 case 'setppbot': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!isCreator) return replyNya(mess.owner)
 if (!quoted) return reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 if (!/image/.test(mime)) return reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
@@ -4806,7 +4634,6 @@ reply(`Sukses`)
 }
 break
 case 'setppgc': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isAdmins) throw mess.admin
 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
@@ -4818,7 +4645,6 @@ replyNya(mess.success)
 }
 break
 case 'setname': case 'setsubject': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4827,7 +4653,6 @@ await kirbotz.groupUpdateSubject(m.chat, text).then((res) => reply(mess.success)
 }
 break
 case 'setdesc': case 'setdesk': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4836,7 +4661,6 @@ await kirbotz.groupUpdateDescription(m.chat, text).then((res) => reply(mess.succ
 }
 break
 case 'add': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4845,7 +4669,6 @@ await kirbotz.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => repl
 }
 break
 case 'kick': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4854,7 +4677,6 @@ await kirbotz.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => r
 }
 break
 case 'tagall': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!q) throw `Teks?`
 let teks = `══✪〘 *👥 Tag All* 〙✪══\n\n${q ? q : ''}\n`
@@ -4865,14 +4687,12 @@ kirbotz.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) 
 }
 break
 case 'hidetag': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isAdmins) throw mess.admin
 kirbotz.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: fakekirbotz })
 }
 break
 case 'promote': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isCreator && !isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4881,7 +4701,6 @@ await kirbotz.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => 
 }
 break
 case 'demote': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.isGroup) throw mess.group
 if (!isCreator && !isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -4890,14 +4709,12 @@ await kirbotz.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => r
 }
 break
 case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!m.quoted && !text) throw `Kirim/Reply Teks Dengan Caption ${prefix + command}`
 ter = command[1].toLowerCase()
 tex = m.quoted ? m.quoted.text ? m.quoted.text : q ? q : m.text : q ? q : m.text
 replyNya(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
 break
 case 'jooxplay':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} Melukis Senja`)
 sticWait(from)
@@ -4916,14 +4733,12 @@ sticWait(from)
                     kirbotz.sendMessage(m.chat, {audio: get_audio, mimetype: 'audio/mpeg', fileName: `${ani.title}.mp3`}, { quoted : fakekirbotz })
                     break
 case 'play':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length < 1) return replyNya(`Kirim perintah ${command} query\nContoh : ${command} dj sad`)
 sticWait(from)
 await sendPlay(from, q)
 break
 case 'ytmp4': case 'ytvideo': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let { ytv } = require('./Lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
@@ -4934,7 +4749,6 @@ kirbotz.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp
 }
 break
 case 'ytmp3': case 'ytaudio': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 let { yta } = require('./Lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
@@ -4953,19 +4767,16 @@ sourceUrl: "https://github.com/AnjusGans"
             }
 break
 case 'speed':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 let timestamp = speed()
 let latensi = speed() - timestamp
 await sendBut5nya(`${latensi.toFixed(4)} _Detik_`)
 }
 break
 case 'runtime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 await sendBut5nya(`${runtime(process.uptime())}`)
 }
 break
 case 'ping': case 'botstatus': case 'statusbot': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 const used = process.memoryUsage()
 const cpus = os.cpus().map(cpu => {
 cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
@@ -5013,13 +4824,11 @@ replyNya(respon)
 }
 break
 case 'ssweb':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 if (!q) throw `Link Nya?`
 sticWait(from)
 kirbotz.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/ssweb?apikey=${lolkey}&url=${q}`}})
 break
 case 'xnxxsearch':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
                     if (args.length == 0) return replyNya(`Example: ${prefix + command} Japanese`)
                     sticWait(from)
@@ -5040,7 +4849,6 @@ anu = `${ini_txt}───────────────\n\n┌ ◪ *DOWNL
 kirbotz.sendMessage(from, { text: anu }, { quoted: fakekirbotz })
 break
               case 'spotifysearch':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
               
                     if (args.length == 0) return replyNya(`Example: ${prefix + command} Melukis Senja`)
                     sticWait(from)
@@ -5058,7 +4866,6 @@ if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah 
                     replyNya(ini_txt)
                     break
 case 'xnxxvideo':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} https://www.xnxx.com/video-uy5a73b/mom_is_horny_-_brooklyn`)
 sticWait(from)
@@ -5083,7 +4890,6 @@ sticWait(from)
                     await kirbotz.sendMessage(m.chat, { image: fott, caption: ini_txt }, { quoted: fakekirbotz})                  
                     break
 case 'tiktokmp3': case 'tiktokaudio': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!text) return reply(`Link Nya Kak???`)
 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(`Contoh ${prefix+command} https://vm.tiktok.com/ZSdQycjUx/?k=1`)
@@ -5100,7 +4906,6 @@ sourceUrl: "https://github.com/AnjusGans"
 }
 break
 case 'tiktok': case 'tiktoknowm': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (!text) throw 'Masukkan Query Link!'
 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(`Link Error`)
@@ -5122,7 +4927,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'yts': case 'ytsearch':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length < 1) return replyNya(`Contoh:\n${command} bukti Virgoun`)
 let list_rows = [];
@@ -5167,7 +4971,6 @@ case 'panties':
 case 'pussy':
 case 'thighs':
 case 'yuri':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let cndn = await fetchJson(`https://raw.githubusercontent.com/jepribarus/JB-Api/main/nsfw/${command}.json`)
@@ -5176,7 +4979,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaperislami':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let kcle = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/Islamic.json`)
@@ -5185,7 +4987,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaperinori':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let kuxe = await fetchJson(`https://raw.githubusercontent.com/qisyana/senku/main/storages/inori-pic.json`)
@@ -5194,7 +4995,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpapercyber':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let xpwl = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/CyberSpace.json`)
@@ -5208,7 +5008,6 @@ case 'husbu':
 case 'milf':
 case 'cosplay':
 case 'wallml':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let eek = await fetchJson(`https://raw.githubusercontent.com/Arya-was/endak-tau/main/${command}.json`)
@@ -5217,7 +5016,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaperteknologi':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let toth = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/Technology.json`)
@@ -5226,7 +5024,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaperanime':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let tozs = await fetchJson(`https://raw.githubusercontent.com/qisyana/senku/main/storages/anime-wallpaper-pic.json`)
@@ -5235,7 +5032,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpapergamer':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let toew = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/GameWallp.json`)
@@ -5244,7 +5040,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaperprogamer':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let xeke = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/Programming.json`)
@@ -5253,7 +5048,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpapermeme':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let crkr = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/meme.json`)
@@ -5262,7 +5056,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'wallpaper':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let crpe = await fetchJson(`https://raw.githubusercontent.com/Aprilia3/RestApi/master/data/Mountain.json`)
@@ -5271,7 +5064,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random }, caption: `Nih Kak` }, { qu
 }
 break
 case 'ppcouple': {
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 sticWait(from)
 let anu = await fetchJson('https://raw.githubusercontent.com/iamriz7/kopel_/main/kopel.json')
@@ -5281,7 +5073,6 @@ kirbotz.sendMessage(m.chat, { image: { url: random.female }, caption: `Fofo Coup
 }
 break
 case 'tiktokstalk':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} namatt`)
 sticWait(from)
@@ -5322,7 +5113,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'githubstalk':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} namagh`)
 sticWait(from)
@@ -5366,7 +5156,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'igstalk':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} namaig`)
 sticWait(from)
@@ -5406,7 +5195,6 @@ kirbotz.relayMessage(m.chat, template.message, { messageId: template.key.id })
 }
 break
 case 'ytstalk':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return replyNya(`Example: ${prefix + command} namachannel`)
 sticWait(from)
@@ -5419,7 +5207,6 @@ cari += `Chanel : ${search.channel_name}\nTentang : ${search.channel_about}\nCre
 replyNya(cari.trim())
 break
 case 'spotify':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
                     if (args.length == 0) return replyNya(`Example: ${prefix + command} https://open.spotify.com/track/0ZEYRVISCaqz5yamWZWzaA`)
                     sticWait(from)
@@ -5435,7 +5222,6 @@ let thumbnail = await getBuffer(get_result.thumbnail)
 kirbotz.sendMessage(m.chat, { image: thumbnail, caption: ini_txt }, { quoted: fakekirbotz})
 break
 case 'pacarserti':{
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 if (args.length == 0) return reply(`Contoh: ${prefix + command} Nama1 Nama2`)
 sticWait(from)
@@ -5503,7 +5289,6 @@ kirbotz.sendFile(m.chat, pp, "", m, { caption: tekse, mentions: await kirbotz.pa
 })
 }
 case 'randomnama':
-if (isBan) return replyBan('Maaf Kamu Sudah Di Ban Silahkan Chat Owner Di Bawah Untuk Membuka Nya')
 
 anu = await fetchJson(`https://api.lolhuman.xyz/api/random/nama?apikey=${lolkey}`)
 replyNya(anu.result)
